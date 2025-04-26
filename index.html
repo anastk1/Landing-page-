@@ -1,215 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roblox Gift Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: white;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-align: center;
-        }
-
-        .form-container, .gift-container, .loading-container, .offer-container {
-            display: none;
-        }
-
-        h1 {
-            margin: 20px;
-            font-size: 2em;
-        }
-
-        .input-box {
-            margin: 15px;
-            padding: 10px;
-            font-size: 1.1em;
-            width: 300px;
-            border-radius: 5px;
-            border: 2px solid #ddd;
-        }
-
-        .submit-btn {
-            padding: 15px;
-            background-color: #ff3b3f;
-            border: none;
-            color: white;
-            font-size: 1.2em;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .submit-btn:hover {
-            background-color: #ff595e;
-        }
-
-        .gift-btn {
-            padding: 10px;
-            margin: 10px;
-            background-color: #00b5e2;
-            color: white;
-            font-size: 1.1em;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .gift-btn:hover {
-            background-color: #00a1c8;
-        }
-
-        .loading {
-            font-size: 1.5em;
-            color: #ffcc00;
-        }
-
-        .offer-btn {
-            padding: 10px;
-            margin-top: 20px;
-            background-color: #ff3b3f;
-            border: none;
-            color: white;
-            font-size: 1.1em;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .offer-btn:hover {
-            background-color: #ff595e;
-        }
-
-        /* Spinner for loading */
-        .spinner {
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid #ff3b3f;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Roblox Free Robux</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .container {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    input, select {
+      margin-bottom: 20px;
+    }
+    button {
+      background: #00c6ff;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #0072ff;
+    }
+    .hidden {
+      display: none;
+    }
+    .loading {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+    .gift-option {
+      background: rgba(255,255,255,0.1);
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .gift-option:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    .progress-bar {
+      width: 100%;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+    .progress {
+      height: 20px;
+      width: 0;
+      background: #00ff9d;
+      animation: progressAnim 4s linear forwards;
+    }
+    @keyframes progressAnim {
+      0% { width: 0; }
+      100% { width: 100%; }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <!-- Form Input Section -->
-        <div class="form-container">
-            <h1>Enter Your Roblox Username</h1>
-            <input type="text" class="input-box" id="username" placeholder="Enter Roblox Username">
-            <select class="input-box" id="device">
-                <option value="android">Android</option>
-                <option value="iphone">iPhone</option>
-                <option value="windows">Windows</option>
-                <option value="xbox">Xbox</option>
-            </select>
-            <button class="submit-btn" id="submitBtn">Submit</button>
-        </div>
 
-        <!-- Loading Screen -->
-        <div class="loading-container">
-            <div class="loading">Verifying...</div>
-            <div class="spinner"></div>
-        </div>
+  <div class="container" id="step1">
+    <h1>Get Free Robux</h1>
+    <input type="text" id="username" placeholder="Enter your Roblox Username" required>
+    <select id="device">
+      <option value="" disabled selected>Select your device</option>
+      <option value="Android">Android</option>
+      <option value="iOS">iPhone (iOS)</option>
+      <option value="Windows">Windows</option>
+      <option value="Xbox">Xbox</option>
+    </select>
+    <button onclick="verifyUsername()">Next</button>
+  </div>
 
-        <!-- Gift Selection -->
-        <div class="gift-container">
-            <h1>Choose Your Roblox Gift</h1>
-            <button class="gift-btn" id="gift1000">1000 Points</button>
-            <button class="gift-btn" id="gift2500">2500 Points</button>
-            <button class="gift-btn" id="gift5000">5000 Points</button>
-            <button class="gift-btn" id="gift9999">9999 Points</button>
-        </div>
-
-        <!-- Offer CPA -->
-        <div class="offer-container">
-            <h1>Please complete an offer to continue</h1>
-            <button class="offer-btn" id="completeOffer">Complete Offer</button>
-        </div>
+  <div class="container hidden" id="checking">
+    <h1>Verifying Username...</h1>
+    <div class="loading">Please wait</div>
+    <div class="progress-bar">
+      <div class="progress"></div>
     </div>
+  </div>
 
-    <script>
-        let username = '';
-        let device = '';
-        let selectedGift = '';
+  <div class="container hidden" id="step2">
+    <h1>Choose Your Gift</h1>
+    <div class="gift-option" onclick="selectGift(1000)">1000 Robux</div>
+    <div class="gift-option" onclick="selectGift(2500)">2500 Robux</div>
+    <div class="gift-option" onclick="selectGift(5000)">5000 Robux</div>
+    <div class="gift-option" onclick="selectGift(9999)">9999 Robux</div>
+  </div>
 
-        // Show the form
-        document.querySelector('.form-container').style.display = 'block';
+  <div class="container hidden" id="sending">
+    <h1>Sending Robux...</h1>
+    <div class="loading">Please wait</div>
+    <div class="progress-bar">
+      <div class="progress"></div>
+    </div>
+  </div>
 
-        // Handle Form Submission
-        document.getElementById('submitBtn').addEventListener('click', function() {
-            username = document.getElementById('username').value;
-            device = document.getElementById('device').value;
+  <div class="container hidden" id="human-verification">
+    <h1>Human Verification Required</h1>
+    <p>Complete one offer to finish.</p>
+    <button onclick="window.location.href='https://your-cpa-link.com'">Verify Now</button>
+  </div>
 
-            if (username.trim() !== '') {
-                document.querySelector('.form-container').style.display = 'none';
-                document.querySelector('.loading-container').style.display = 'block';
+  <script>
+    function verifyUsername() {
+      const username = document.getElementById('username').value;
+      const device = document.getElementById('device').value;
 
-                // Simulate Verification Process
-                setTimeout(function() {
-                    document.querySelector('.loading-container').style.display = 'none';
-                    document.querySelector('.gift-container').style.display = 'block';
-                }, 2000);
-            } else {
-                alert("Please enter your username!");
-            }
-        });
+      if (!username || !device) {
+        alert('Please enter your username and select your device.');
+        return;
+      }
 
-        // Handle Gift Selection
-        document.getElementById('gift1000').addEventListener('click', function() {
-            selectedGift = '1000 Points';
-            startGiftSending();
-        });
+      document.getElementById('step1').classList.add('hidden');
+      document.getElementById('checking').classList.remove('hidden');
 
-        document.getElementById('gift2500').addEventListener('click', function() {
-            selectedGift = '2500 Points';
-            startGiftSending();
-        });
+      setTimeout(() => {
+        document.getElementById('checking').classList.add('hidden');
+        document.getElementById('step2').classList.remove('hidden');
+      }, 4000);
+    }
 
-        document.getElementById('gift5000').addEventListener('click', function() {
-            selectedGift = '5000 Points';
-            startGiftSending();
-        });
+    function selectGift(amount) {
+      document.getElementById('step2').classList.add('hidden');
+      document.getElementById('sending').classList.remove('hidden');
 
-        document.getElementById('gift9999').addEventListener('click', function() {
-            selectedGift = '9999 Points';
-            startGiftSending();
-        });
+      setTimeout(() => {
+        document.getElementById('sending').classList.add('hidden');
+        document.getElementById('human-verification').classList.remove('hidden');
+      }, 4000);
+    }
+  </script>
 
-        // Simulate Sending the Gift
-        function startGiftSending() {
-            document.querySelector('.gift-container').style.display = 'none';
-            setTimeout(function() {
-                showOfferPage();
-            }, 4000);  // Wait 4 seconds before showing the offer page
-        }
-
-        // Show CPA Offers
-        function showOfferPage() {
-            document.querySelector('.offer-container').style.display = 'block';
-        }
-
-        // Handle Offer Completion
-        document.getElementById('completeOffer').addEventListener('click', function() {
-            alert("Thank you for completing the offer! Your points are now being added to your Roblox account.");
-            // Optionally, you can redirect here to a success page or Roblox link.
-        });
-    </script>
 </body>
 </html>
