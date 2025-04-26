@@ -1,6 +1,4 @@
-); }
-    }
-    
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -142,7 +140,6 @@
       color: rgba(255, 255, 255, 0.5);
     }
     
-    /* New Device Selection Style */
     .device-selection {
       display: flex;
       justify-content: space-between;
@@ -410,7 +407,6 @@
       60% { transform: translateY(-10px); }
     }
     
-    /* Enhanced Mobile Responsiveness */
     @media (max-width: 480px) {
       .container {
         padding: 20px 15px;
@@ -734,4 +730,47 @@
       setTimeout(() => {
         completedOffer = true;
         document.getElementById('final-amount').textContent = selectedGift.toLocaleString();
-        document.getElementById('final-username').textContent = robloxUsername
+          document.getElementById('final-username').textContent = robloxUsername;
+        goToStep(6);
+      }, 2000);
+    }
+    
+    // Helper function to navigate between steps
+    function goToStep(step) {
+      // Hide all steps
+      document.querySelectorAll('.container').forEach(el => {
+        el.classList.add('hidden');
+      });
+      
+      // Show the selected step
+      document.getElementById(`step${step}`).classList.remove('hidden');
+      currentStep = step;
+      
+      // Reset verification messages if going back to step 2
+      if (step === 2) {
+        document.getElementById('verification-success').classList.add('hidden');
+        document.getElementById('verification-failed').classList.add('hidden');
+      }
+    }
+    
+    // Helper function to simulate progress bar
+    function simulateProgress(progressId, duration, callback) {
+      const progressBar = document.getElementById(progressId);
+      let width = 0;
+      const interval = 50;
+      const increment = (interval / duration) * 100;
+      
+      const timer = setInterval(() => {
+        width += increment;
+        progressBar.style.width = width + '%';
+        
+        if (width >= 100) {
+          clearInterval(timer);
+          if (callback) callback();
+        }
+      }, interval);
+    }
+  </script>
+</body>
+</html>
+ 
