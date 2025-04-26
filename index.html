@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -140,6 +139,7 @@
       color: rgba(255, 255, 255, 0.5);
     }
     
+    /* New Device Selection Style */
     .device-selection {
       display: flex;
       justify-content: space-between;
@@ -407,6 +407,7 @@
       60% { transform: translateY(-10px); }
     }
     
+    /* Enhanced Mobile Responsiveness */
     @media (max-width: 480px) {
       .container {
         padding: 20px 15px;
@@ -728,9 +729,9 @@
       
       // Simulate offer completion
       setTimeout(() => {
-        completedOffer = true;
+     completedOffer = true;
         document.getElementById('final-amount').textContent = selectedGift.toLocaleString();
-          document.getElementById('final-username').textContent = robloxUsername;
+        document.getElementById('final-username').textContent = robloxUsername;
         goToStep(6);
       }, 2000);
     }
@@ -773,4 +774,3 @@
   </script>
 </body>
 </html>
- 
