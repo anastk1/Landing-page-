@@ -1,3 +1,6 @@
+); }
+    }
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -407,3 +410,328 @@
       60% { transform: translateY(-10px); }
     }
     
+    /* Enhanced Mobile Responsiveness */
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px 15px;
+        border-radius: 12px;
+      }
+      
+      h1 {
+        font-size: 24px;
+        margin-bottom: 15px;
+      }
+      
+      .device-selection {
+        flex-wrap: wrap;
+      }
+      
+      .device-option {
+        min-width: calc(50% - 5px);
+        margin-bottom: 10px;
+      }
+      
+      .gift-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .btn {
+        padding: 12px 20px;
+        font-size: 15px;
+      }
+      
+      .device-icon {
+        font-size: 25px;
+      }
+    }
+    
+    @media (max-width: 350px) {
+      .device-option {
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Step 1: Username and Device -->
+  <div class="container" id="step1">
+    <img src="https://tr.rbxcdn.com/94f1e5a8b6e9b0e5e5e5e5e5e5e5e5e5/768/432/Image/Png" alt="Roblox Logo" class="logo">
+    <h1>🚀 Unlock Your Robux Bonus!</h1>
+    <p>Join thousands of players claiming exclusive rewards today!</p>
+    
+    <div class="input-group">
+      <label for="username"><i class="fas fa-user"></i> Roblox Username</label>
+      <input type="text" id="username" placeholder="Enter your exact username" required>
+    </div>
+    
+    <label style="text-align: center; display: block; margin-bottom: 15px;">
+      <i class="fas fa-gamepad"></i> Select Your Gaming Device
+    </label>
+    
+    <div class="device-selection">
+      <div class="device-option" data-device="android" onclick="selectDevice(this, 'android')">
+        <div class="device-icon"><i class="fab fa-android"></i></div>
+        <div class="device-name">Android</div>
+      </div>
+      <div class="device-option" data-device="ios" onclick="selectDevice(this, 'ios')">
+        <div class="device-icon"><i class="fab fa-apple"></i></div>
+        <div class="device-name">iPhone</div>
+      </div>
+      <div class="device-option" data-device="windows" onclick="selectDevice(this, 'windows')">
+        <div class="device-icon"><i class="fab fa-windows"></i></div>
+        <div class="device-name">Windows</div>
+      </div>
+      <div class="device-option" data-device="xbox" onclick="selectDevice(this, 'xbox')">
+        <div class="device-icon"><i class="fab fa-xbox"></i></div>
+        <div class="device-name">Xbox</div>
+      </div>
+    </div>
+    
+    <input type="hidden" id="selected-device">
+    
+    <button class="btn" onclick="verifyUsername()">
+      <i class="fas fa-arrow-right"></i> Continue to Rewards
+    </button>
+  </div>
+
+  <!-- Step 2: Verifying Account -->
+  <div class="container hidden" id="step2">
+    <div class="loading">
+      <div class="loading-spinner"></div>
+      <h2>Verifying Your Account</h2>
+      <p>Checking username: <strong id="verifying-username"></strong></p>
+    </div>
+    
+    <div class="progress-container">
+      <div class="progress-bar" id="verification-progress"></div>
+    </div>
+    
+    <div class="verification-message hidden" id="verification-success">
+      <i class="fas fa-check-circle"></i>
+      <div>Verification successful! Account found.</div>
+    </div>
+    
+    <div class="verification-message hidden" id="verification-failed" style="border-left-color: var(--error);">
+      <i class="fas fa-exclamation-circle"></i>
+      <div>Account not found. Please check your username.</div>
+    </div>
+  </div>
+
+  <!-- Step 3: Gift Selection -->
+  <div class="container hidden" id="step3">
+    <h1>🎁 Select Your Reward</h1>
+    <p>Choose your free Robux package below</p>
+    
+    <div class="gift-grid">
+      <div class="gift-option" onclick="selectGift(1000)">
+        <div class="gift-amount">1,000</div>
+        <div class="gift-label">ROBUX</div>
+      </div>
+      <div class="gift-option" onclick="selectGift(2500)">
+        <div class="gift-amount">2,500</div>
+        <div class="gift-label">ROBUX</div>
+      </div>
+      <div class="gift-option" onclick="selectGift(5000)">
+        <div class="gift-amount">5,000</div>
+        <div class="gift-label">ROBUX</div>
+      </div>
+      <div class="gift-option" onclick="selectGift(9999)">
+        <div class="gift-amount">9,999</div>
+        <div class="gift-label">ROBUX</div>
+      </div>
+    </div>
+    
+    <input type="hidden" id="selected-gift">
+    
+    <button class="btn" id="claim-btn" disabled onclick="processGift()">
+      <i class="fas fa-gift"></i> Claim Reward
+    </button>
+  </div>
+
+  <!-- Step 4: Processing Gift -->
+  <div class="container hidden" id="step4">
+    <div class="loading">
+      <div class="loading-spinner"></div>
+      <h2>Processing Your Gift</h2>
+      <p>Sending <strong id="gift-amount"></strong> Robux to <strong id="receiving-username"></strong></p>
+    </div>
+    
+    <div class="progress-container">
+      <div class="progress-bar" id="processing-progress"></div>
+    </div>
+    
+    <div class="security-alert">
+      <i class="fas fa-shield-alt"></i>
+      <div>
+        <strong>Security Notice:</strong> To prevent fraud, we need to verify you're human.
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 5: Human Verification -->
+  <div class="container hidden" id="step5">
+    <h1>Human Verification</h1>
+    <p>Complete one quick offer to confirm you're not a robot and receive your reward.</p>
+    
+    <div class="offer-container">
+      <div class="offer">
+        <div class="offer-icon">
+          <i class="fas fa-mobile-alt"></i>
+        </div>
+        <div class="offer-content">
+          <div class="offer-title">Mobile App Install</div>
+          <div class="offer-desc">Install and open one of our partner apps</div>
+        </div>
+        <button class="offer-btn" onclick="completeOffer(1)">Start</button>
+      </div>
+      
+      <div class="offer">
+        <div class="offer-icon">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <div class="offer-content">
+          <div class="offer-title">Email Verification</div>
+          <div class="offer-desc">Verify your email address</div>
+        </div>
+        <button class="offer-btn" onclick="completeOffer(2)">Start</button>
+      </div>
+      
+      <div class="offer">
+        <div class="offer-icon">
+          <i class="fas fa-gamepad"></i>
+        </div>
+        <div class="offer-content">
+          <div class="offer-title">Game Trial</div>
+          <div class="offer-desc">Play for 30 seconds to verify</div>
+        </div>
+        <button class="offer-btn" onclick="completeOffer(3)">Start</button>
+      </div>
+    </div>
+    
+    <p style="font-size: 14px; opacity: 0.7; margin-top: 20px;">
+      <i class="fas fa-lock"></i> Your information is secure and will not be shared.
+    </p>
+  </div>
+
+  <!-- Step 6: Success -->
+  <div class="container hidden" id="step6">
+    <div class="success-message">
+      <div class="success-icon">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <h2>Verification Complete!</h2>
+      <p>Your <strong id="final-amount"></strong> Robux reward is being sent to:</p>
+      <p><strong id="final-username"></strong></p>
+      <p>Please allow 5-10 minutes for processing.</p>
+      
+      <button class="btn" style="margin-top: 30px;" onclick="window.location.href='https://www.roblox.com'">
+        <i class="fas fa-external-link-alt"></i> Go to Roblox
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Global variables
+    let currentStep = 1;
+    let robloxUsername = '';
+    let selectedDevice = '';
+    let selectedGift = 0;
+    let completedOffer = false;
+    
+    // Select device function
+    function selectDevice(element, device) {
+      document.querySelectorAll('.device-option').forEach(opt => {
+        opt.classList.remove('selected');
+      });
+      element.classList.add('selected');
+      selectedDevice = device;
+      document.getElementById('selected-device').value = selectedDevice;
+    }
+    
+    // Initialize event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+      // Gift selection
+      document.querySelectorAll('.gift-option').forEach(option => {
+        option.addEventListener('click', function() {
+          document.querySelectorAll('.gift-option').forEach(opt => {
+            opt.classList.remove('selected');
+          });
+          this.classList.add('selected');
+          selectedGift = parseInt(this.querySelector('.gift-amount').textContent.replace(/,/g, ''));
+          document.getElementById('selected-gift').value = selectedGift;
+          document.getElementById('claim-btn').disabled = false;
+        });
+      });
+    });
+    
+    // Step 1: Verify username
+    function verifyUsername() {
+      robloxUsername = document.getElementById('username').value.trim();
+      
+      if (!robloxUsername) {
+        alert('Please enter your Roblox username.');
+        return;
+      }
+      
+      if (!selectedDevice) {
+        alert('Please select your gaming device.');
+        return;
+      }
+      
+      // Move to step 2
+      goToStep(2);
+      
+      // Show verifying username
+      document.getElementById('verifying-username').textContent = robloxUsername;
+      
+      // Simulate verification process
+      simulateProgress('verification-progress', 4000, function() {
+        // 90% success rate for demo
+        const isSuccess = Math.random() > 0.1;
+        
+        if (isSuccess) {
+          document.getElementById('verification-success').classList.remove('hidden');
+          setTimeout(() => goToStep(3), 1500);
+        } else {
+          document.getElementById('verification-failed').classList.remove('hidden');
+          setTimeout(() => goToStep(1), 2000);
+        }
+      });
+    }
+    
+    // Step 3: Process gift
+    function processGift() {
+      if (!selectedGift) {
+        alert('Please select a gift amount');
+        return;
+      }
+      
+      // Move to step 4
+      goToStep(4);
+      
+      // Show processing details
+      document.getElementById('gift-amount').textContent = selectedGift.toLocaleString();
+      document.getElementById('receiving-username').textContent = robloxUsername;
+      
+      // Simulate processing
+      simulateProgress('processing-progress', 5000, function() {
+        goToStep(5);
+      });
+    }
+    
+    // Step 5: Complete offer
+    function completeOffer(offerId) {
+      if (completedOffer) return;
+      
+      // Disable all offer buttons
+      document.querySelectorAll('.offer-btn').forEach(btn => {
+        btn.disabled = true;
+        btn.textContent = 'Processing...';
+      });
+      
+      // Simulate offer completion
+      setTimeout(() => {
+        completedOffer = true;
+        document.getElementById('final-amount').textContent = selectedGift.toLocaleString();
+        document.getElementById('final-username').textContent = robloxUsername
