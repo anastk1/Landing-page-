@@ -521,22 +521,29 @@
       });
     }
     
-    // Redirect to Content Locker
+    // Redirect to Content Locker (AdBlueMedia version)
     function redirectToContentLocker() {
       if (!selectedGift) {
         alert('Please select a gift amount');
         return;
       }
       
-      // Collect user data
-      const username = document.getElementById('username').value.trim();
-      const device = document.getElementById('selected-device').value;
+      // Replace with your actual AdBlueMedia Content Locker URL
+      const contentLockerUrl = "https://your-adbluemedia-locker-url.com";
       
-      // Replace with your actual Content Locker URL
-      const contentLockerUrl = `https://your-content-locker-domain.com/?user=${encodeURIComponent(username)}&device=${encodeURIComponent(device)}&amount=${selectedGift}`;
+      // Open in new tab with loading indicator
+      const newWindow = window.open(contentLockerUrl, '_blank');
       
-      // Redirect to Content Locker
-      window.location.href = contentLockerUrl;
+      // Show loading state on button
+      const claimBtn = document.getElementById('claim-btn');
+      claimBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redirecting...';
+      claimBtn.disabled = true;
+      
+      // Reset button after 3 seconds (fallback)
+      setTimeout(() => {
+        claimBtn.innerHTML = '<i class="fas fa-gift"></i> Claim Reward';
+        claimBtn.disabled = false;
+      }, 3000);
     }
     
     // Helper function to navigate between steps
@@ -576,4 +583,4 @@
     }
   </script>
 </body>
-  </html>
+        </html>
