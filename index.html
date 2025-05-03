@@ -86,7 +86,7 @@
         
         .game-image {
             height: 0;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            padding-bottom: 56.25%;
             background-size: cover;
             background-position: center;
             transition: all 0.5s ease;
@@ -113,12 +113,29 @@
             overflow: hidden;
         }
         
+        .game-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        
         .game-rating {
             display: flex;
             align-items: center;
-            margin-bottom: 12px;
             color: #f39c12;
             font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+        }
+        
+        .downloads-count {
+            font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+            color: #636e72;
+            display: flex;
+            align-items: center;
+        }
+        
+        .downloads-count i {
+            margin-right: 5px;
+            color: var(--primary);
         }
         
         .rating-stars {
@@ -134,7 +151,7 @@
             color: #636e72;
         }
         
-        .install-btn {
+        .download-btn {
             display: block;
             background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
@@ -152,9 +169,52 @@
             font-size: clamp(0.8rem, 2.5vw, 0.95rem);
         }
         
-        .install-btn:hover {
+        .download-btn:hover {
             transform: scale(1.03);
             box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+        }
+        
+        /* Security Check Modal */
+        .security-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .security-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            animation: slideUp 0.5s ease;
+        }
+        
+        .security-icon {
+            font-size: 50px;
+            color: #2ecc71;
+            margin-bottom: 20px;
+            animation: pulse 1.5s infinite;
+        }
+        
+        .security-message {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .countdown {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary);
         }
         
         footer {
@@ -194,6 +254,23 @@
             to { opacity: 1; }
         }
         
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
         /* تعديلات للشاشات الكبيرة */
         @media (min-width: 768px) {
             .container {
@@ -213,7 +290,7 @@
                 padding: 20px;
             }
             
-            .install-btn {
+            .download-btn {
                 padding: 10px 20px;
             }
         }
@@ -234,17 +311,22 @@
                 <div class="game-content">
                     <h3 class="game-title">FIFA 2025 MOD</h3>
                     <p class="game-description">The ultimate football experience with unlimited coins, unlocked players and all premium features!</p>
-                    <div class="game-rating">
-                        <div class="rating-stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
+                    <div class="game-stats">
+                        <div class="game-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="rating-value">4.7/5</div>
                         </div>
-                        <div class="rating-value">4.7/5</div>
+                        <div class="downloads-count">
+                            <i class="fas fa-download"></i> 12,845
+                        </div>
                     </div>
-                    <a href="https://d.fcmobilemodapk.com/dl/fc-mobile-mod-apk-latest-v24.0.03-fcmobilemodapk.com.apk" class="install-btn">INSTALLER</a>
+                    <button class="download-btn" onclick="startDownload('https://d.fcmobilemodapk.com/dl/fc-mobile-mod-apk-latest-v24.0.03-fcmobilemodapk.com.apk')">DOWNLOAD NOW</button>
                 </div>
             </div>
             
@@ -254,17 +336,22 @@
                 <div class="game-content">
                     <h3 class="game-title">Drive Zone Car</h3>
                     <p class="game-description">Realistic car simulator with unlimited money, all cars unlocked and premium upgrades!</p>
-                    <div class="game-rating">
-                        <div class="rating-stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
+                    <div class="game-stats">
+                        <div class="game-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="rating-value">4.9/5</div>
                         </div>
-                        <div class="rating-value">4.9/5</div>
+                        <div class="downloads-count">
+                            <i class="fas fa-download"></i> 14,932
+                        </div>
                     </div>
-                    <a href="https://files.drivezoneonlineapk.com/Drive_Zone_Car_Simulator_1.3.0_drivezoneonlineapk.com.xapk" class="install-btn">INSTALLER</a>
+                    <button class="download-btn" onclick="startDownload('https://files.drivezoneonlineapk.com/Drive_Zone_Car_Simulator_1.3.0_drivezoneonlineapk.com.xapk')">DOWNLOAD NOW</button>
                 </div>
             </div>
             
@@ -274,17 +361,22 @@
                 <div class="game-content">
                     <h3 class="game-title">Roblox MOD</h3>
                     <p class="game-description">Premium Roblox mod with unlimited Robux, all items unlocked and special features!</p>
-                    <div class="game-rating">
-                        <div class="rating-stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
+                    <div class="game-stats">
+                        <div class="game-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="rating-value">4.6/5</div>
                         </div>
-                        <div class="rating-value">4.6/5</div>
+                        <div class="downloads-count">
+                            <i class="fas fa-download"></i> 9,756
+                        </div>
                     </div>
-                    <a href="https://files.modsmaniac.com/2025/05/Roblox-Menu_2.671.818.apk" class="install-btn">INSTALLER</a>
+                    <button class="download-btn" onclick="startDownload('https://files.modsmaniac.com/2025/05/Roblox-Menu_2.671.818.apk')">DOWNLOAD NOW</button>
                 </div>
             </div>
             
@@ -294,17 +386,22 @@
                 <div class="game-content">
                     <h3 class="game-title">Minecraft Mobile MOD</h3>
                     <p class="game-description">Unlimited resources, premium skins and all features unlocked in this amazing mod!</p>
-                    <div class="game-rating">
-                        <div class="rating-stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
+                    <div class="game-stats">
+                        <div class="game-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="rating-value">4.8/5</div>
                         </div>
-                        <div class="rating-value">4.8/5</div>
+                        <div class="downloads-count">
+                            <i class="fas fa-download"></i> 13,421
+                        </div>
                     </div>
-                    <a href="https://dl.mineckraftapk.com/dl/Mineckraftapk_APK_Latest_Version.apk" class="install-btn">INSTALLER</a>
+                    <button class="download-btn" onclick="startDownload('https://dl.mineckraftapk.com/dl/Mineckraftapk_APK_Latest_Version.apk')">DOWNLOAD NOW</button>
                 </div>
             </div>
             
@@ -314,17 +411,22 @@
                 <div class="game-content">
                     <h3 class="game-title">Baseball 9 MOD</h3>
                     <p class="game-description">Premium baseball game with unlimited coins, all players unlocked and special abilities!</p>
-                    <div class="game-rating">
-                        <div class="rating-stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
+                    <div class="game-stats">
+                        <div class="game-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="rating-value">4.5/5</div>
                         </div>
-                        <div class="rating-value">4.5/5</div>
+                        <div class="downloads-count">
+                            <i class="fas fa-download"></i> 8,234
+                        </div>
                     </div>
-                    <a href="https://files.modyolo.com/BASEBALL%209/BASEBALL%209%20v3.7.0%20MOD.apk" class="install-btn">INSTALLER</a>
+                    <button class="download-btn" onclick="startDownload('https://files.modyolo.com/BASEBALL%209/BASEBALL%209%20v3.7.0%20MOD.apk')">DOWNLOAD NOW</button>
                 </div>
             </div>
             
@@ -334,18 +436,36 @@
                 <div class="game-content">
                     <h3 class="game-title">Head Basketball MOD</h3>
                     <p class="game-description">Unlimited money, all characters unlocked and special powers in this fun basketball game!</p>
-                    <div class="game-rating">
-                        <div class="rating-stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
+                    <div class="game-stats">
+                        <div class="game-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="rating-value">4.9/5</div>
                         </div>
-                        <div class="rating-value">4.5/5</div>
+                        <div class="downloads-count">
+                            <i class="fas fa-download"></i> 15,000
+                        </div>
                     </div>
-                    <a href="https://files.modyolo.com/Head%20Basketball/Head%20Basketball%20(MOD,%20Unlimited%20Money)%20v4.4.2%20-.apk" class="install-btn">INSTALLER</a>
+                    <button class="download-btn" onclick="startDownload('https://files.modyolo.com/Head%20Basketball/Head%20Basketball%20(MOD,%20Unlimited%20Money)%20v4.4.2%20-.apk')">DOWNLOAD NOW</button>
                 </div>
+            </div>
+        </div>
+        
+        <!-- Security Check Modal -->
+        <div id="securityModal" class="security-modal">
+            <div class="security-content">
+                <div class="security-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="security-message">
+                    Security verification in progress...
+                </div>
+                <div class="countdown" id="countdown">5</div>
             </div>
         </div>
         
@@ -353,5 +473,44 @@
             <p>© 2023 Premium Mod Games. All rights reserved.</p>
         </footer>
     </div>
+
+    <script>
+        // Function to generate random download counts between 8200 and 15000
+        function generateRandomDownloads() {
+            const downloadElements = document.querySelectorAll('.downloads-count');
+            downloadElements.forEach(el => {
+                const randomDownloads = Math.floor(Math.random() * (15000 - 8200 + 1)) + 8200;
+                const formattedDownloads = randomDownloads.toLocaleString();
+                el.innerHTML = `<i class="fas fa-download"></i> ${formattedDownloads}`;
+            });
+        }
+        
+        // Function to handle download with security check
+        function startDownload(url) {
+            const modal = document.getElementById('securityModal');
+            const countdownElement = document.getElementById('countdown');
+            
+            // Show security modal
+            modal.style.display = 'flex';
+            
+            let seconds = 5;
+            countdownElement.textContent = seconds;
+            
+            const countdownInterval = setInterval(() => {
+                seconds--;
+                countdownElement.textContent = seconds;
+                
+                if (seconds <= 0) {
+                    clearInterval(countdownInterval);
+                    modal.style.display = 'none';
+                    // Redirect to download URL
+                    window.location.href = url;
+                }
+            }, 1000);
+        }
+        
+        // Generate random download counts when page loads
+        window.onload = generateRandomDownloads;
+    </script>
 </body>
 </html>
