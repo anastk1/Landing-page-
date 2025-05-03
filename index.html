@@ -113,9 +113,10 @@
             overflow: hidden;
         }
         
-        .game-stats {
+        .game-info {
             display: flex;
-            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
             margin-bottom: 12px;
         }
         
@@ -124,13 +125,17 @@
             align-items: center;
             color: #f39c12;
             font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+            flex: 1;
+            min-width: 120px;
         }
         
         .downloads-count {
-            font-size: clamp(0.8rem, 2.5vw, 0.95rem);
-            color: #636e72;
             display: flex;
             align-items: center;
+            font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+            color: #636e72;
+            flex: 1;
+            min-width: 120px;
         }
         
         .downloads-count i {
@@ -140,6 +145,7 @@
         
         .rating-stars {
             margin-right: 8px;
+            white-space: nowrap;
         }
         
         .rating-stars i {
@@ -149,6 +155,7 @@
         .rating-value {
             font-weight: bold;
             color: #636e72;
+            white-space: nowrap;
         }
         
         .download-btn {
@@ -294,6 +301,14 @@
                 padding: 10px 20px;
             }
         }
+
+        /* تعديلات للشاشات الصغيرة جدًا */
+        @media (max-width: 400px) {
+            .game-info {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
@@ -311,7 +326,7 @@
                 <div class="game-content">
                     <h3 class="game-title">FIFA 2025 MOD</h3>
                     <p class="game-description">The ultimate football experience with unlimited coins, unlocked players and all premium features!</p>
-                    <div class="game-stats">
+                    <div class="game-info">
                         <div class="game-rating">
                             <div class="rating-stars">
                                 <i class="fas fa-star"></i>
@@ -336,7 +351,7 @@
                 <div class="game-content">
                     <h3 class="game-title">Drive Zone Car</h3>
                     <p class="game-description">Realistic car simulator with unlimited money, all cars unlocked and premium upgrades!</p>
-                    <div class="game-stats">
+                    <div class="game-info">
                         <div class="game-rating">
                             <div class="rating-stars">
                                 <i class="fas fa-star"></i>
@@ -361,7 +376,7 @@
                 <div class="game-content">
                     <h3 class="game-title">Roblox MOD</h3>
                     <p class="game-description">Premium Roblox mod with unlimited Robux, all items unlocked and special features!</p>
-                    <div class="game-stats">
+                    <div class="game-info">
                         <div class="game-rating">
                             <div class="rating-stars">
                                 <i class="fas fa-star"></i>
@@ -386,7 +401,7 @@
                 <div class="game-content">
                     <h3 class="game-title">Minecraft Mobile MOD</h3>
                     <p class="game-description">Unlimited resources, premium skins and all features unlocked in this amazing mod!</p>
-                    <div class="game-stats">
+                    <div class="game-info">
                         <div class="game-rating">
                             <div class="rating-stars">
                                 <i class="fas fa-star"></i>
@@ -411,7 +426,7 @@
                 <div class="game-content">
                     <h3 class="game-title">Baseball 9 MOD</h3>
                     <p class="game-description">Premium baseball game with unlimited coins, all players unlocked and special abilities!</p>
-                    <div class="game-stats">
+                    <div class="game-info">
                         <div class="game-rating">
                             <div class="rating-stars">
                                 <i class="fas fa-star"></i>
@@ -436,7 +451,7 @@
                 <div class="game-content">
                     <h3 class="game-title">Head Basketball MOD</h3>
                     <p class="game-description">Unlimited money, all characters unlocked and special powers in this fun basketball game!</p>
-                    <div class="game-stats">
+                    <div class="game-info">
                         <div class="game-rating">
                             <div class="rating-stars">
                                 <i class="fas fa-star"></i>
@@ -475,16 +490,6 @@
     </div>
 
     <script>
-        // Function to generate random download counts between 8200 and 15000
-        function generateRandomDownloads() {
-            const downloadElements = document.querySelectorAll('.downloads-count');
-            downloadElements.forEach(el => {
-                const randomDownloads = Math.floor(Math.random() * (15000 - 8200 + 1)) + 8200;
-                const formattedDownloads = randomDownloads.toLocaleString();
-                el.innerHTML = `<i class="fas fa-download"></i> ${formattedDownloads}`;
-            });
-        }
-        
         // Function to handle download with security check
         function startDownload(url) {
             const modal = document.getElementById('securityModal');
@@ -508,9 +513,6 @@
                 }
             }, 1000);
         }
-        
-        // Generate random download counts when page loads
-        window.onload = generateRandomDownloads;
     </script>
 </body>
 </html>
